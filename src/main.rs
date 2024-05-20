@@ -17,7 +17,8 @@ async fn main() -> std::io::Result<()> {
             .wrap(middleware::Logger::default())
             .service(web::resource("/index.html").to(|| async { "Hello world!" }))
             .service(web::resource("/").to(services::data_processing::index))
-                .service(web::resource("/hello/{name}").to(services::data_processing::greet))
+            .service(web::resource("/hello/{name}").to(services::data_processing::greet))
+            .service(web::resource("/process").route(web::post().to(services::data_processing::process)))
     })
         .bind(("0.0.0.0", 8000))?
         .run()
