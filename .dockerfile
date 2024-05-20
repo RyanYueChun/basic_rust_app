@@ -14,7 +14,7 @@ COPY ./src ./src
 RUN cargo build --release
 
 # Start a new stage to create a smaller image without unnecessary build dependencies
-FROM apt-get update && apt-get install -y curl && apt-get clean
+FROM debian:bookworm-slim
 
 # Set the working directory
 WORKDIR /usr/src/app
